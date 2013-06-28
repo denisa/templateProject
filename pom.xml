@@ -11,22 +11,49 @@
         <module>backend</module>
         <module>integration</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.derby</groupId>
+                <artifactId>derby</artifactId>
+                <version>10.10.1.1</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.derby</groupId>
+                <artifactId>derbyclient</artifactId>
+                <version>10.10.1.1</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
     <build>
-	    <defaultGoal>clean install</defaultGoal>
-	    <plugins>
-		   <plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<version>3.0</version>
-			<inherited>true</inherited>
-			<configuration>
-				<source>1.7</source>
-				<target>1.7</target>
-				<verbose>true</verbose>
-				<showWarnings>true</showWarnings>
-				<showDeprecation>true</showDeprecation>
-			</configuration>
-		</plugin>
+        <defaultGoal>clean install</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <verbose>true</verbose>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -36,8 +63,9 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-	</plugins>
+        </plugins>
     </build>
+
     <profiles>
         <profile>
             <id>integration</id>
@@ -100,37 +128,41 @@
                         </executions>
                         <configuration>
                             <container>
-                                <containerId>jboss71x</containerId>
+                                <containerId>glassfish4x</containerId>
+                                <!-- http://download.java.net/glassfish/4.0/release/glassfish-4.0.zip-->
                                 <artifactInstaller>
-                                    <groupId>org.jboss.as</groupId>
-                                    <artifactId>installer</artifactId>
-                                    <version>7.1.1.Final</version>
+                                    <groupId>org.glassfish.main.distributions</groupId>
+                                    <artifactId>glassfish</artifactId>
+                                    <version>4.0</version>
                                 </artifactInstaller>
-                                <dependencies combine.children="append">
-                                    <dependency>
-                                        <groupId>org.apache.derby</groupId>
-                                        <artifactId>derbyclient</artifactId>
-                                    </dependency>
-                                </dependencies>
-                                <systemProperties combine.children="append">
-                                    <user.timezone>${test.timezone}</user.timezone>
-                                    <derby.system.home>${project.build.directory}/derby</derby.system.home>
-                                    <hibernate.dialect>org.hibernate.dialect.DerbyTenSevenDialect</hibernate.dialect>
-                                </systemProperties>
+                                <!--
+                                                                <dependencies combine.children="append">
+                                                                    <dependency>
+                                                                        <groupId>org.apache.derby</groupId>
+                                                                        <artifactId>derbyclient</artifactId>
+                                                                    </dependency>
+                                                                </dependencies>
+                                                                <systemProperties combine.children="append">
+                                                                    <user.timezone>${test.timezone}</user.timezone>
+                                                                    <derby.system.home>${project.build.directory}/derby</derby.system.home>
+                                                                    <hibernate.dialect>org.hibernate.dialect.DerbyTenSevenDialect</hibernate.dialect>
+                                                                </systemProperties>
+                                -->
                             </container>
-                            <configuration>
-                                <properties combine.children="append">
-                                    <!--suppress MavenModelInspection -->
-                                    <cargo.datasource.datasource.derby>cargo.datasource.driver=org.apache.derby.jdbc.ClientDriver|
-                                        cargo.datasource.url=jdbc:derby://localhost/integrationDB|
-                                        cargo.datasource.jndi=${datasource.jndi}|
-                                        cargo.datasource.username=APP|
-                                        cargo.datasource.password=nonemptypassword
-                                    </cargo.datasource.datasource.derby>
-                                    <cargo.servlet.port>9090</cargo.servlet.port>
-                                    <cargo.servlet.users>admin:admin:ManagementRealm</cargo.servlet.users>
-                                </properties>
-                            </configuration>
+                            <!--
+                                                        <configuration>
+                                                            <properties combine.children="append">
+                                                                &lt;!&ndash;suppress MavenModelInspection &ndash;&gt;
+                                                                <cargo.datasource.datasource.derby>cargo.datasource.driver=org.apache.derby.jdbc.ClientDriver|
+                                                                    cargo.datasource.url=jdbc:derby://localhost/integrationDB|
+                                                                    cargo.datasource.jndi=${datasource.jndi}|
+                                                                    cargo.datasource.username=APP|
+                                                                    cargo.datasource.password=nonemptypassword
+                                                                </cargo.datasource.datasource.derby>
+                                                                <cargo.servlet.port>9090</cargo.servlet.port>
+                                                            </properties>
+                                                        </configuration>
+                            -->
                         </configuration>
                     </plugin>
                     <plugin>
