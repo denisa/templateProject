@@ -36,6 +36,12 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -74,6 +80,18 @@
                     <exists>integration.project</exists>
                 </file>
             </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.glassfish.jersey.core</groupId>
+                    <artifactId>jersey-client</artifactId>
+                    <version>2.0</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.derby</groupId>
+                    <artifactId>derbyclient</artifactId>
+                </dependency>
+            </dependencies>
             <build>
                 <plugins>
                     <plugin>
@@ -145,7 +163,6 @@
                                                                 <systemProperties combine.children="append">
                                                                     <user.timezone>${test.timezone}</user.timezone>
                                                                     <derby.system.home>${project.build.directory}/derby</derby.system.home>
-                                                                    <hibernate.dialect>org.hibernate.dialect.DerbyTenSevenDialect</hibernate.dialect>
                                                                 </systemProperties>
                                 -->
                             </container>
@@ -155,7 +172,7 @@
                                                                 &lt;!&ndash;suppress MavenModelInspection &ndash;&gt;
                                                                 <cargo.datasource.datasource.derby>cargo.datasource.driver=org.apache.derby.jdbc.ClientDriver|
                                                                     cargo.datasource.url=jdbc:derby://localhost/integrationDB|
-                                                                    cargo.datasource.jndi=${datasource.jndi}|
+                                                                    cargo.datasource.jndi=jdbc/templateProject|
                                                                     cargo.datasource.username=APP|
                                                                     cargo.datasource.password=nonemptypassword
                                                                 </cargo.datasource.datasource.derby>
@@ -163,6 +180,18 @@
                                                             </properties>
                                                         </configuration>
                             -->
+                            <deployables>
+                                <deployable>
+                                    <groupId>li.antonio.templateProject.backend</groupId>
+                                    <artifactId>endpoints</artifactId>
+                                    <type>war</type>
+                                    <properties>
+                                        <context>endpoints</context>
+                                    </properties>
+                                    <pingURL>http://localhost:8080/endpoints/api/countries</pingURL>
+                                    <pingTimeout>20000</pingTimeout>
+                                </deployable>
+                            </deployables>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -191,12 +220,6 @@
                     </plugin>
                 </plugins>
             </build>
-            <dependencies>
-                <dependency>
-                    <groupId>org.apache.derby</groupId>
-                    <artifactId>derbyclient</artifactId>
-                </dependency>
-            </dependencies>
         </profile>
     </profiles>
 </project>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence">
+    <persistence-unit name="templateProject">
+        <jta-data-source>jdbc/templateProject</jta-data-source>
+    </persistence-unit>
+</persistence>

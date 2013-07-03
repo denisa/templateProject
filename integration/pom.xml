@@ -10,4 +10,14 @@
 
     <groupId>li.antonio.templateProject</groupId>
     <artifactId>integration</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>li.antonio.templateProject.backend</groupId>
+            <artifactId>endpoints</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>

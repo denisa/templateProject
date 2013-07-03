@@ -9,6 +9,6 @@
     </parent>
 
     <groupId>li.antonio.templateProject.backend</groupId>
-    <artifactId>war</artifactId>
+    <artifactId>endpoints</artifactId>
     <packaging>war</packaging>
 </project>
