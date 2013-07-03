@@ -26,6 +26,18 @@
                 <version>10.10.1.1</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>7.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.11</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -33,13 +45,11 @@
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -58,6 +68,30 @@
                     <verbose>true</verbose>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>test-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <inherited>true</inherited>
+                <configuration>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
             <plugin>
@@ -82,6 +116,33 @@
             </activation>
             <dependencies>
                 <dependency>
+                    <groupId>li.antonio.templateProject.backend</groupId>
+                    <artifactId>endpoints</artifactId>
+                    <version>${project.version}</version>
+                    <type>war</type>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <!-- test-jar before jar to select the correct persistence.xml -->
+                    <groupId>li.antonio.templateProject.backend</groupId>
+                    <artifactId>atlas</artifactId>
+                    <version>${project.version}</version>
+                    <type>test-jar</type>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>li.antonio.templateProject.backend</groupId>
+                    <artifactId>atlas</artifactId>
+                    <version>${project.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>javax</groupId>
+                    <artifactId>javaee-api</artifactId>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
                     <groupId>org.glassfish.jersey.core</groupId>
                     <artifactId>jersey-client</artifactId>
                     <version>2.0</version>
@@ -89,7 +150,18 @@
                 </dependency>
                 <dependency>
                     <groupId>org.apache.derby</groupId>
+                    <artifactId>derby</artifactId>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.derby</groupId>
                     <artifactId>derbyclient</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.eclipse.persistence</groupId>
+                    <artifactId>org.eclipse.persistence.jpa</artifactId>
+                    <version>2.5.0</version>
+                    <scope>test</scope>
                 </dependency>
             </dependencies>
             <build>
@@ -106,7 +178,7 @@
                     <plugin>
                         <groupId>org.carlspring.maven</groupId>
                         <artifactId>derby-maven-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>start-derby</id>
@@ -160,26 +232,24 @@
                                                                         <artifactId>derbyclient</artifactId>
                                                                     </dependency>
                                                                 </dependencies>
-                                                                <systemProperties combine.children="append">
-                                                                    <user.timezone>${test.timezone}</user.timezone>
-                                                                    <derby.system.home>${project.build.directory}/derby</derby.system.home>
-                                                                </systemProperties>
-                                -->
+   -->
+                                <systemProperties combine.children="append">
+                                    <derby.system.home>${project.build.directory}/derby</derby.system.home>
+                                </systemProperties>
                             </container>
-                            <!--
-                                                        <configuration>
-                                                            <properties combine.children="append">
-                                                                &lt;!&ndash;suppress MavenModelInspection &ndash;&gt;
-                                                                <cargo.datasource.datasource.derby>cargo.datasource.driver=org.apache.derby.jdbc.ClientDriver|
-                                                                    cargo.datasource.url=jdbc:derby://localhost/integrationDB|
-                                                                    cargo.datasource.jndi=jdbc/templateProject|
-                                                                    cargo.datasource.username=APP|
-                                                                    cargo.datasource.password=nonemptypassword
-                                                                </cargo.datasource.datasource.derby>
-                                                                <cargo.servlet.port>9090</cargo.servlet.port>
-                                                            </properties>
-                                                        </configuration>
-                            -->
+                            <configuration>
+                                <properties combine.children="append">
+                                    <cargo.datasource.datasource.derby>
+                                        cargo.datasource.driver=org.apache.derby.jdbc.ClientDriver|
+                                        cargo.datasource.url=jdbc:derby://localhost/integrationDB|
+                                        cargo.datasource.jndi=jdbc/templateProject|
+                                        cargo.datasource.username=APP
+                                    </cargo.datasource.datasource.derby>
+                                    <!--
+                                        cargo.datasource.password=
+                                      -->
+                                </properties>
+                            </configuration>
                             <deployables>
                                 <deployable>
                                     <groupId>li.antonio.templateProject.backend</groupId>

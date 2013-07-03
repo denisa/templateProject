@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <artifactId>backend</artifactId>
         <groupId>li.antonio.templateProject</groupId>
@@ -9,13 +8,6 @@
     </parent>
 
     <groupId>li.antonio.templateProject.backend</groupId>
-    <artifactId>endpoints</artifactId>
-    <packaging>war</packaging>
-    <dependencies>
-        <dependency>
-            <groupId>li.antonio.templateProject.backend</groupId>
-            <artifactId>atlas</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
+    <artifactId>atlas</artifactId>
+
 </project>
