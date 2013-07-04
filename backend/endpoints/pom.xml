@@ -11,6 +11,9 @@
     <groupId>li.antonio.templateProject.backend</groupId>
     <artifactId>endpoints</artifactId>
     <packaging>war</packaging>
+    <description>Packaged the java-based back-end code in a war file for deployment.</description>
+
+
     <dependencies>
         <dependency>
             <groupId>li.antonio.templateProject.backend</groupId>

@@ -6,6 +6,7 @@
     <artifactId>templateProject</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <description>Top-level project to build and test a java-based REST back-end and a (missing) webapp-front-end.</description>
 
     <modules>
         <module>backend</module>
@@ -219,20 +220,11 @@
                         <configuration>
                             <container>
                                 <containerId>glassfish4x</containerId>
-                                <!-- http://download.java.net/glassfish/4.0/release/glassfish-4.0.zip-->
                                 <artifactInstaller>
                                     <groupId>org.glassfish.main.distributions</groupId>
                                     <artifactId>glassfish</artifactId>
                                     <version>4.0</version>
                                 </artifactInstaller>
-                                <!--
-                                                                <dependencies combine.children="append">
-                                                                    <dependency>
-                                                                        <groupId>org.apache.derby</groupId>
-                                                                        <artifactId>derbyclient</artifactId>
-                                                                    </dependency>
-                                                                </dependencies>
-   -->
                                 <systemProperties combine.children="append">
                                     <derby.system.home>${project.build.directory}/derby</derby.system.home>
                                 </systemProperties>
@@ -245,9 +237,6 @@
                                         cargo.datasource.jndi=jdbc/templateProject|
                                         cargo.datasource.username=APP
                                     </cargo.datasource.datasource.derby>
-                                    <!--
-                                        cargo.datasource.password=
-                                      -->
                                 </properties>
                             </configuration>
                             <deployables>

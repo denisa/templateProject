@@ -10,6 +10,9 @@
 
     <groupId>li.antonio.templateProject.backend</groupId>
     <artifactId>integration</artifactId>
+    <description>Test the REST-api in a deployed container.
+    Note that since the data-model is complex, this module use junit/surefire to seed the database from java code,
+        then junit/failsafe to peform REST-base testing of the provided api.</description>
 
     <dependencies>
         <dependency>
