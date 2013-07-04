@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import org.junit.Before;
 import org.junit.Test;
 
-import li.antonio.templateProject.endpoints.Country;
+import li.antonio.templateProject.backend.integration.Country;
 
 public class CountryResourceIT {
 

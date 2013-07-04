@@ -1,4 +1,4 @@
-package li.antonio.templateProject.endpoints;
+package li.antonio.templateProject.backend.atlas;
 
 import java.util.List;
 

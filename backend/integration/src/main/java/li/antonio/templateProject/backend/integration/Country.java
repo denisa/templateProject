@@ -1,4 +1,4 @@
-package li.antonio.templateProject.backend;
+package li.antonio.templateProject.backend.integration;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

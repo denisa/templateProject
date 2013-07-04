@@ -1,4 +1,4 @@
-package li.antonio.templateProject.endpoints;
+package li.antonio.templateProject.backend.atlas;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

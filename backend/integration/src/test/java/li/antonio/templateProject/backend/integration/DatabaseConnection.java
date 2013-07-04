@@ -1,4 +1,4 @@
-package li.antonio.templateProject.backend;
+package li.antonio.templateProject.backend.integration;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,14 +13,12 @@ import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 
-public class DataSetup {
-    private static final String BASE_URL = "jdbc:derby:" + "directory:integrationDB";
+public abstract class DatabaseConnection {
+    private static final String BASE_URL = "jdbc:derby:directory:integrationDB";
     private static final String DERBY_SYSTEM_HOME = "derby.system.home";
-
     private EntityManagerFactory emFactory;
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
     @Before
     public void openDataBase() throws SQLException {
@@ -37,12 +35,6 @@ public class DataSetup {
         emFactory = Persistence.createEntityManagerFactory("test-pu", persistenceProperties);
         entityManager = emFactory.createEntityManager();
         entityManager.getTransaction().begin();
-    }
-
-    @Test
-    public void seedDataBase() {
-        entityManager.persist(new li.antonio.templateProject.endpoints.Country("France"));
-        entityManager.persist(new li.antonio.templateProject.endpoints.Country("Suisse"));
     }
 
     @After
@@ -75,5 +67,4 @@ public class DataSetup {
             System.getProperties().remove(DERBY_SYSTEM_HOME);
         }
     }
-
 }

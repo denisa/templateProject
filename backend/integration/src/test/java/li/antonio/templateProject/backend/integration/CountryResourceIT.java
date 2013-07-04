@@ -1,4 +1,4 @@
-package li.antonio.templateProject.backend;
+package li.antonio.templateProject.backend.integration;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
