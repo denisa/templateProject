@@ -10,7 +10,7 @@
 
     <modules>
         <module>backend</module>
-        <module>integration</module>
+        <module>applicationTest</module>
     </modules>
 
     <dependencyManagement>

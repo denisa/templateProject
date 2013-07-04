@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>templateProject</artifactId>
+        <groupId>li.antonio</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>li.antonio.templateProject</groupId>
+    <artifactId>applicationTest</artifactId>
+    <description>End-to-end test of the application. In a real project, the test would use something like selenium to test the
+        combination of an html/css/javascript front-end app over the REST api provided by the backend.
+
+        Note that since the data-model is complex, this module use junit/surefire to seed the database from java code,
+        then junit/failsafe to peform REST-base testing of the provided api.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <!-- test-jar before jar to select the correct persistence.xml -->
+            <groupId>li.antonio.templateProject.backend</groupId>
+            <artifactId>atlas</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>li.antonio.templateProject.backend</groupId>
+            <artifactId>atlas</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>li.antonio.templateProject.backend</groupId>
+            <artifactId>restClientTest</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>li.antonio.templateProject.backend</groupId>
+            <artifactId>restClientTest</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+            <type>test-jar</type>
+        </dependency>
+    </dependencies>
+</project>
